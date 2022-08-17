@@ -1,0 +1,3 @@
+[submodule "themes/jb"]
+	path = themes/jb
+	url = git@github.com:JupiterBroadcasting/jb-hugo-theme.git
