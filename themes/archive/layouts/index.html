@@ -1,0 +1,30 @@
+{{ define "main" }}
+<section class="hero is-medium is-frontpage">
+  <div class="hero-body">
+    <div class="container">
+      <img class="logo" src="/images/logo_narrow.png"/>
+      <p class="subtitle has-text-centered">
+        Home to the best shows on Linux, Open Source, Security, Privacy, Community, Development, and News.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+{{.Content}}
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Archived Shows</h1>
+       {{ range where .Site.Sections ".Title" "Shows" }}
+          {{ range .Pages }}
+            <div class="column is-6 is-4-fullhd is-4-desktop is-12-mobile"  style="display: flex;">
+              {{ partial "episode/show.html" . }}
+            </div>
+          {{ end }}
+        {{ end }}
+  </div>
+</section>
+
+
+{{ end }}
