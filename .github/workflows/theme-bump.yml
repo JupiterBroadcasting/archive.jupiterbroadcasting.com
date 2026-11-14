@@ -1,0 +1,86 @@
+# Pins the newest `develop` commits of jb-hugo-theme and of the main site (source of people pages and avatars) in
+# go.mod and opens (or updates) a PR into `develop`.
+# Production only gets it with the next normal develop -> main release PR.
+#
+# Triggers: the theme repo's notify-sites workflow (repository_dispatch), an hourly fallback, or by hand.
+# Token: PRs opened with the default GITHUB_TOKEN don't start other workflows (so no e2e run on the PR) and need the
+#   org/repo setting "Allow GitHub Actions to create and approve pull requests". Set a THEME_BUMP_TOKEN secret
+#   (fine-grained PAT or GitHub App token: contents + pull-requests write on this repo) to avoid both.
+name: Bump jb-hugo-theme and people
+
+on:
+  repository_dispatch:
+    types: [theme-updated, people-updated]
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: theme-bump
+  cancel-in-progress: false
+
+env:
+  THEME_MODULE: github.com/goodwinlabs/jb-hugo-theme
+  PEOPLE_MODULE: github.com/goodwinlabs/jupiterbroadcasting.com
+  HUGO_IMAGE: ghcr.io/gohugoio/hugo:v0.169.0
+  BRANCH: bot/theme-bump
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+          token: ${{ secrets.THEME_BUMP_TOKEN || github.token }}
+
+      - name: Pin newest theme develop
+        id: pin
+        run: |
+          hugo() { docker run --rm -u "$(id -u):$(id -g)" -v "$PWD":/src -w /src -e HOME=/tmp -e HUGO_CACHEDIR=/tmp/hugo_cache --entrypoint hugo "$HUGO_IMAGE" "$@"; }
+          hugo mod get "${THEME_MODULE}@develop" "${PEOPLE_MODULE}@develop"
+          hugo mod tidy
+          if git diff --quiet -- go.mod go.sum; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Theme pin already current"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            {
+              echo "summary<<EOF"
+              git diff -U0 go.mod | grep -E '^[-+]\s' | sed 's/^/    /'
+              echo "EOF"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build the site with the new theme
+        if: steps.pin.outputs.changed == 'true'
+        run: |
+          docker run --rm -u "$(id -u):$(id -g)" -v "$PWD":/src -w /src -e HOME=/tmp -e HUGO_CACHEDIR=/tmp/hugo_cache \
+            --entrypoint hugo "$HUGO_IMAGE" --gc --quiet -d /tmp/public
+
+      - name: Open or update the bump PR
+        if: steps.pin.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.THEME_BUMP_TOKEN || github.token }}
+          SUMMARY: ${{ steps.pin.outputs.summary }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git commit -qam "Bump jb-hugo-theme / people modules"
+          git push -f origin "$BRANCH"
+          body="Updates module pins in \`go.mod\`:
+
+          ${SUMMARY}
+
+          Opened by \`.github/workflows/theme-bump.yml\`. The site built with this theme before the PR was opened; check the Render preview, then merge. Production gets it with the next develop → main release PR."
+          if [ -n "$(gh pr list --head "$BRANCH" --base develop --state open --json number --jq '.[].number')" ]; then
+            gh pr edit "$BRANCH" --body "$body"
+          else
+            gh pr create --base develop --head "$BRANCH" --title "Bump jb-hugo-theme / people modules" --body "$body"
+          fi
+          gh pr merge "$BRANCH" --auto --squash || echo "Auto-merge unavailable (enable 'Allow auto-merge' and a required check on develop)"
