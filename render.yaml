@@ -1,17 +1,16 @@
+# Render Blueprint: develop deploys and PR previews. Production runs the nginx container (Dockerfile) instead.
+# Render applies this file only to services created from it as a Blueprint; a service made in the dashboard ignores
+#   envVars and branch here.
 services:
-# A static site
   - type: web
-    plan: starter
-    name: jb-archive-prv
     env: static
+    name: test-jb-archive
+    branch: develop
+    autoDeploy: true
     buildCommand: bash build.sh
     staticPublishPath: public/
     pullRequestPreviewsEnabled: true
-    # should have auto deploy enabled by default
-    # autoDeploy: true
-    # might be something we look into for the future (i.e. GH actions don't need to trigger rebuild for deploy-preview)
-    # buildFilter:
-    #   paths:
-    #   - src/**/*.js
-    #   ignoredPaths:
-    #   - src/**/*.test.js
+    envVars:
+      # the main site's Render deploy: nav links, Support button and footer logo point here (build.sh)
+      - key: MAIN_URL
+        value: https://test-jb-main.onrender.com
