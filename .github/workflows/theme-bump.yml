@@ -81,6 +81,15 @@ jobs:
           if [ -n "$(gh pr list --head "$BRANCH" --base develop --state open --json number --jq '.[].number')" ]; then
             gh pr edit "$BRANCH" --body "$body"
           else
-            gh pr create --base develop --head "$BRANCH" --title "Bump jb-hugo-theme / people modules" --body "$body"
+            if ! out=$(gh pr create --base develop --head "$BRANCH" --title "Bump jb-hugo-theme / people modules" --body "$body" 2>&1); then
+              echo "$out"
+              # Org/repo setting blocks GITHUB_TOKEN from opening PRs: keep the pushed branch, warn with a one-click link
+              if grep -q "not permitted to create" <<<"$out"; then
+                echo "::warning title=Bump branch pushed; PR not opened::GitHub Actions may not open PRs in this repo and THEME_BUMP_TOKEN is not set. Open it: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/compare/develop...${BRANCH}?expand=1"
+                exit 0
+              fi
+              exit 1
+            fi
+            echo "$out"
           fi
           gh pr merge "$BRANCH" --auto --squash || echo "Auto-merge unavailable (enable 'Allow auto-merge' and a required check on develop)"
