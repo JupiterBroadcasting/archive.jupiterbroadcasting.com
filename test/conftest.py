@@ -140,8 +140,11 @@ def expected_rss_feeds() -> List[Dict[str,str,]]:
 @fixture
 def expected_dropdown_items() -> Dict[str,List[Dict[str,str]]]:
     return {
-        # Shows has no sub-menu here; its dropdown is the RSS feeds menu
-        "Shows": [],
+        # one entry per retired show (config.toml), titled as in its _index.md
+        "Shows": [
+            {'href': f"/show/{d.name}/", 'title': re.search(r'^title\s*=\s*"(.*)"', (d / "_index.md").read_text(), re.M).group(1).strip()}
+            for d in (Path(__file__).parents[1] / "content" / "show").iterdir() if d.is_dir()
+        ],
         "People": [
             {'href': '/hosts/', 'title': 'Hosts'},
             {'href': '/guests/', 'title': 'Guests'},

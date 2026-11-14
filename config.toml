@@ -74,6 +74,203 @@ title = 'Jupiter Broadcasting Archive'
     url = "/show/"
     weight = -90
 
+    # one entry per retired show, alphabetical
+    [[Menu.Main]]
+        name = "Ask Noah Show"
+        identifier = "ask-noah-show"
+        url = "/show/ask-noah-show/"
+        weight = 1
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Beer is Tasty"
+        identifier = "beer-is-tasty"
+        url = "/show/beer-is-tasty/"
+        weight = 2
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "BSD Now"
+        identifier = "bsd-now"
+        url = "/show/bsd-now/"
+        weight = 3
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Choose Linux"
+        identifier = "choose-linux"
+        url = "/show/choose-linux/"
+        weight = 4
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Coder Radio"
+        identifier = "coder-radio"
+        url = "/show/coder-radio/"
+        weight = 5
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Computer Action Show"
+        identifier = "computer-action-show"
+        url = "/show/computer-action-show/"
+        weight = 6
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "FauxShow"
+        identifier = "fauxshow"
+        url = "/show/fauxshow/"
+        weight = 7
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "HowTo Linux"
+        identifier = "howto-linux"
+        url = "/show/howto-linux/"
+        weight = 8
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "In Depth Look"
+        identifier = "in-depth-look"
+        url = "/show/in-depth-look/"
+        weight = 9
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Joint Failures"
+        identifier = "joint-failures"
+        url = "/show/joint-failures/"
+        weight = 10
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Jupiter@Nite"
+        identifier = "jupiter-at-nite"
+        url = "/show/jupiter-at-nite/"
+        weight = 11
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Legend of the Stoned Owl"
+        identifier = "legend-of-the-stoned-owl"
+        url = "/show/legend-of-the-stoned-owl/"
+        weight = 12
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Linux Action News"
+        identifier = "linux-action-news"
+        url = "/show/linux-action-news/"
+        weight = 13
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Linux Action Show"
+        identifier = "linux-action-show"
+        url = "/show/linux-action-show/"
+        weight = 14
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "MMOrgue"
+        identifier = "mmorgue"
+        url = "/show/mmorgue/"
+        weight = 15
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Office Hours"
+        identifier = "office-hours"
+        url = "/show/office-hours/"
+        weight = 16
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Plan B"
+        identifier = "plan-b"
+        url = "/show/plan-b/"
+        weight = 17
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Rover Log"
+        identifier = "rover-log"
+        url = "/show/rover-log/"
+        weight = 18
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "SciByte"
+        identifier = "scibyte"
+        url = "/show/scibyte/"
+        weight = 19
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Self-Hosted"
+        identifier = "self-hosted"
+        url = "/show/self-hosted/"
+        weight = 20
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "STOked"
+        identifier = "stoked"
+        url = "/show/stoked/"
+        weight = 21
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Tech Talk Today"
+        identifier = "tech-talk-today"
+        url = "/show/tech-talk-today/"
+        weight = 22
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "TechSNAP"
+        identifier = "techsnap"
+        url = "/show/techsnap/"
+        weight = 23
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "The Friday Stream"
+        identifier = "the-friday-stream"
+        url = "/show/the-friday-stream/"
+        weight = 24
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "TORked"
+        identifier = "torked"
+        url = "/show/torked/"
+        weight = 25
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Unfilter"
+        identifier = "unfilter"
+        url = "/show/unfilter/"
+        weight = 26
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "User Error"
+        identifier = "user-error"
+        url = "/show/user-error/"
+        weight = 27
+        parent = "shows"
+
+    [[Menu.Main]]
+        name = "Women's Tech Radio"
+        identifier = "womens-tech-radio"
+        url = "/show/womens-tech-radio/"
+        weight = 28
+        parent = "shows"
+
 [[Menu.Main]]
     name = "People"
     identifier = "people"
