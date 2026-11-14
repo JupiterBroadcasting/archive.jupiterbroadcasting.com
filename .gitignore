@@ -32,3 +32,4 @@ scraped-data
 /screenshots/
 .pytest_cache/
 __pycache__
+.render-config-*.toml
