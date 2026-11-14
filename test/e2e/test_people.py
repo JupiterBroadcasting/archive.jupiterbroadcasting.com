@@ -4,7 +4,11 @@ from pathlib import Path
 from pytest import fixture
 from playwright.sync_api import Page, expect
 
+from episode_data import CONTENT_SHOW, META_FILES, load_episode
+
 from episode_data import PEOPLE as PEOPLE_DIR
+
+EPISODES = [load_episode(p) for p in CONTENT_SHOW.glob("*/*.md") if p.name not in META_FILES]
 
 
 def front_matter_field(text: str, key: str) -> str | None:
@@ -37,7 +41,9 @@ def test_people_all_hosts(page: Page):
     """
     Ensure the host list shows exactly the non-hidden hosts in content/people
     """
-    expected = {f"/hosts/{username}" for username in active_host_usernames()}
+    # hosts with no episodes on this site link to their person page (jb-hugo-theme: partials/people/small.html)
+    hosted = {h for e in EPISODES for h in e.data.get("hosts") or []}
+    expected = {f"/hosts/{u}" if u in hosted else f"/people/{u}/" for u in active_host_usernames()}
     assert expected
 
     host_links = page.locator(".host-list a")
