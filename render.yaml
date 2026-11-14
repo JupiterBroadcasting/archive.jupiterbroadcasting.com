@@ -1,15 +1,17 @@
-# Render Blueprint: develop deploys and PR previews. Production runs the nginx container (Dockerfile) instead.
+# Render Blueprint (https://render.com/docs/blueprint-spec): develop deploys and PR previews.
+# Production runs the nginx container (Dockerfile) instead.
 # Render applies this file only to services created from it as a Blueprint; a service made in the dashboard ignores
 #   envVars and branch here.
 services:
   - type: web
-    env: static
+    runtime: static
     name: test-jb-archive
     branch: develop
-    autoDeploy: true
+    autoDeployTrigger: commit
     buildCommand: bash build.sh
     staticPublishPath: public/
-    pullRequestPreviewsEnabled: true
+    previews:
+      generation: automatic
     envVars:
       # the main site's Render deploy: nav links, Support button and footer logo point here (build.sh)
       - key: MAIN_URL
