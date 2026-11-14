@@ -21,4 +21,14 @@ export PATH="${tools}/hugo:${tools}/dart-sass:${tools}/go/bin:${PATH}"
 sass --version
 hugo version
 go version
-hugo --minify --gc --baseURL '/'
+# Render previews: absolute URLs use this deploy's own address, and MAIN_URL (set on the Render service) points the
+#   links back to the main site (nav, Support button, footer logo) at the matching main-site deploy instead of production
+base_url="${RENDER_EXTERNAL_URL:-/}"
+config=config.toml
+if [ -n "${MAIN_URL:-}" ]; then
+  config=$(mktemp ./.render-config-XXXXXX.toml)
+  trap 'rm -f "$config"' EXIT
+  sed "s#https://www.jupiterbroadcasting.com#${MAIN_URL%/}#g" config.toml > "$config"
+fi
+echo "baseURL=${base_url} main=${MAIN_URL:-production}"
+hugo --minify --gc --baseURL "$base_url" --config "$config"
