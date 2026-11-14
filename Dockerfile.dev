@@ -1,0 +1,4 @@
+ARG HUGO_VERSION=0.169.0
+FROM ghcr.io/gohugoio/hugo:v${HUGO_VERSION}
+CMD [ "serve", "-D", "--bind", "0.0.0.0" ]
+ENTRYPOINT [ "hugo" ]

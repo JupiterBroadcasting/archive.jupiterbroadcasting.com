@@ -1,0 +1,36 @@
++++
+outputs = ["html", "markdown", "llms", "episodes"]
+title = "Linux Action News"
+description = "Weekly Linux news and analysis by Chris and Wes. The show every week we hope you'll go to when you want to hear an informed discussion about what’s happening."
+date = "2022-05-10T04:10:01-05:00"
+draft = false
+categories = ["Linux Action News"]
+show = "linux-action-news"
+hosts = ["chris","wes"]
+
+type = "show"
+active = false
+
+header_image = "/images/shows/linux-action-news.png"
+
+podverse_podcast_id = "haAiVbD1N9"
+
+
+[links.support]
+  url = "/membership"
+[links.twitter]
+  url = "https://twitter.com/linuxactionnews"
+[links.email]
+  url = "https://linuxactionnews.com/contact"
+[links.shownotes]
+  url="https://linuxactionnews.com"
+[links.youtube]
+  url="https://www.youtube.com/playlist?list=PLUW3LUwQvegxyaQeHQuMrDq94CT2ZZm9F"
+[links.matrix]
+  url="https://matrix.to/#/#linux-action-news:matrix.org"
+[links.smart-link]
+  url="https://episodes.fm/160075139"
+
++++
+
+Weekly Linux news and analysis by Chris and Wes. The show every week we hope you'll go to when you want to hear an informed discussion about what’s happening.
