@@ -21,7 +21,7 @@ title = 'Jupiter Broadcasting Archive'
   home_subtitle = "The archive of retired Jupiter Broadcasting shows. Current shows live at jupiterbroadcasting.com."
 
 [params.footer.logo]
-  image = "/images/logo_no_rocket_archive.svg"
+  image = "/images/logo_no_rocket.svg"
   text = "Jupiter Broadcasting"
   url = "https://www.jupiterbroadcasting.com/"
 [params.footer.left]
