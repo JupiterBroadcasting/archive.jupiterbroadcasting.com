@@ -7,7 +7,7 @@ instagram: https://instagram.com/danrabbit
 linkedin: null
 title: Danielle Foré
 twitter: https://x.com/danielfore
-type: guest
+type: host
 username: danielle-fore
 youtube: null
 ---

@@ -11,7 +11,7 @@ instagram: https://instagram.com/kernellinux
 linkedin: null
 title: Noah J. Chelliah
 twitter: https://x.com/kernellinux
-type: guest
+type: host
 username: kernellinux
 youtube: null
 ---

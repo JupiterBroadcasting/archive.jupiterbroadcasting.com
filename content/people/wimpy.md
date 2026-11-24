@@ -9,7 +9,7 @@ instagram: null
 linkedin: https://www.linkedin.com/in/martinwimpress/
 title: Martin Wimpress
 twitter: https://x.com/m_wimpress
-type: guest
+type: host
 username: wimpy
 youtube: null
 ---

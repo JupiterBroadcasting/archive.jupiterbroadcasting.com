@@ -7,7 +7,7 @@ instagram: null
 linkedin: null
 title: Jason Evangelho
 twitter: https://twitter.com/killyourfm
-type: guest
+type: host
 username: jason
 youtube: null
 ---

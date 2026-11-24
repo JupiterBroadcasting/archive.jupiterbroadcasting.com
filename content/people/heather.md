@@ -7,7 +7,7 @@ instagram: null
 linkedin: null
 title: Heather
 twitter: https://x.com/scibyte_heather
-type: guest
+type: host
 username: heather
 youtube: null
 ---

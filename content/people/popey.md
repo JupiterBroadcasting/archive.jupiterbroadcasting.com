@@ -8,7 +8,7 @@ instagram: null
 linkedin: null
 title: Alan Pope
 twitter: https://x.com/popey
-type: guest
+type: host
 username: popey
 youtube: null
 ---
