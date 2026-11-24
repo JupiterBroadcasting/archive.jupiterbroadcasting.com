@@ -21,7 +21,7 @@ title = 'Jupiter Broadcasting Archive'
   home_subtitle = "The archive of retired Jupiter Broadcasting shows. Current shows live at jupiterbroadcasting.com."
 
 [params.footer.logo]
-  image = "/images/logo_no_rocket.svg"
+  image = "/images/logo_no_rocket_archive.svg"
   text = "Jupiter Broadcasting"
   url = "https://www.jupiterbroadcasting.com/"
 [params.footer.left]
@@ -44,7 +44,7 @@ title = 'Jupiter Broadcasting Archive'
 
 # Main Menu: archive pages first, then links back to the main site
 [[Menu.Main]]
-    pre = '<img src="/images/logo_no_rocket.svg" alt="Jupiter Broadcasting logo without Rocket" style="height: 2rem">'
+    pre = '<img src="/images/logo_no_rocket_archive.svg" alt="Jupiter Broadcasting Archive logo" style="height: 2rem; max-height: none">'
     identifier = "home"
     url = "/"
     weight = -100
