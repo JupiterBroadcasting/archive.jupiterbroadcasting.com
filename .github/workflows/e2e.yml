@@ -14,10 +14,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # people pages come from the main site's Hugo Module; tests read the same pinned copy
-      - name: Fetch pinned people pages
-        run: ./scripts/fetch-people.sh
-
       - name: Start containers
         working-directory: ./test/
         env:

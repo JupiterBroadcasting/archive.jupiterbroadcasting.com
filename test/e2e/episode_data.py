@@ -1,13 +1,11 @@
 import json
-import os
 import re
 from datetime import datetime, timezone
 from dataclasses import dataclass, field
 from pathlib import Path
 
 CONTENT: Path = Path(__file__).parents[2] / "content"
-# People pages are mounted from the main site's Hugo Module; scripts/fetch-people.sh checks out the pinned copy here
-PEOPLE: Path = Path(os.environ.get("JB_PEOPLE_DIR", Path(__file__).parents[1] / ".jbsite" / "content" / "people"))
+PEOPLE: Path = CONTENT / "people"
 CONTENT_SHOW: Path = CONTENT / "show"
 META_FILES: set[str] = {"_index.md", "subscribe.md"}
 ACTIVE_SAMPLE: int = 5  # the scraper can rewrite an active show's last 5 episodes

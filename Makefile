@@ -41,7 +41,6 @@ deploy-prod: ## Deploy everything to production
 	docker image prune -af
 
 tests: ## Run the test suite (serve the site with `make dev-tests` first)
-	./scripts/fetch-people.sh
 	docker build --rm -f Dockerfile.tests -t jb_tests:latest .
 	if [ -d screenshots ]; then rm -rf screenshots/; fi
 	docker run --rm --net=host --user 1000:1000 --volume "$${PWD}":/app -w /app jb_tests:latest

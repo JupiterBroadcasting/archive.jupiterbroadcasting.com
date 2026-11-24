@@ -1,5 +1,4 @@
-# Pins the newest `develop` commits of jb-hugo-theme and of the main site (source of people pages and avatars) in
-# go.mod and opens (or updates) a PR into `develop`.
+# Pins the newest `develop` commit of jb-hugo-theme in go.mod and opens (or updates) a PR into `develop`.
 # Production only gets it with the next normal develop -> main release PR.
 #
 # Triggers: the theme repo's notify-sites workflow (repository_dispatch), an hourly fallback, or by hand.
@@ -10,7 +9,7 @@ name: Bump jb-hugo-theme and people
 
 on:
   repository_dispatch:
-    types: [theme-updated, people-updated]
+    types: [theme-updated]
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
@@ -25,7 +24,6 @@ concurrency:
 
 env:
   THEME_MODULE: github.com/goodwinlabs/jb-hugo-theme
-  PEOPLE_MODULE: github.com/goodwinlabs/jupiterbroadcasting.com
   HUGO_IMAGE: ghcr.io/gohugoio/hugo:v0.169.0
   BRANCH: bot/theme-bump
 
@@ -42,7 +40,7 @@ jobs:
         id: pin
         run: |
           hugo() { docker run --rm -u "$(id -u):$(id -g)" -v "$PWD":/src -w /src -e HOME=/tmp -e HUGO_CACHEDIR=/tmp/hugo_cache --entrypoint hugo "$HUGO_IMAGE" "$@"; }
-          hugo mod get "${THEME_MODULE}@develop" "${PEOPLE_MODULE}@develop"
+          hugo mod get "${THEME_MODULE}@develop"
           hugo mod tidy
           if git diff --quiet -- go.mod go.sum; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
